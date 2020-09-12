@@ -3,7 +3,7 @@
     <h1 class="title is-size-1">Merci de vous connecter :</h1>
     <div class="container">
       <p class="control has-icons-left has-icons-right">
-        <input class="input" type="username" placeholder="Username" />
+        <input class="input" type="username" v-model="dataLogin.username" placeholder="Username" />
         <span class="icon is-small is-left">
           <i class="fas fa-user"></i>
         </span>
@@ -14,32 +14,54 @@
     </div>
 
     <div class="container">
-      <p class="control has-icons-left has-icons-right">
-        <input class="input" type="email" placeholder="Email" />
-        <span class="icon is-small is-left">
-          <i class="fas fa-envelope"></i>
-        </span>
-        <span class="icon is-small is-right">
-          <i class="fas fa-check"></i>
-        </span>
-      </p>
-    </div>
-    <div class="container">
       <p class="control has-icons-left">
-        <input class="input" type="password" placeholder="Password" />
+        <input class="input" type="password" v-model="dataLogin.password" placeholder="Password" />
         <span class="icon is-small is-left">
           <i class="fas fa-lock"></i>
         </span>
       </p>
     </div>
-    <input class="styled" type="button" value="Envoyer" />
+    <input @click.prevent="logIn" class="styled" type="submit" value="Envoyer" />
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import { mapState } from "vuex";
 export default {
   name: "Signin",
-  components: {},
+  data() {
+    return {
+      dataLogin: {
+        username: null,
+        password: null
+      },
+      msg: ""
+    };
+  },
+  computed: {
+    ...mapState(["user"])
+  },
+  methods: {
+    logIn() {
+      if (
+        
+        this.dataLogin.username !== null ||
+        this.dataLogin.password !== null
+      ) {
+        axios
+          .post("http://localhost:3000/api/auth/login", this.dataLogin)
+          .then(response => {
+            localStorage.setItem('token',response.data.token)
+            location.replace(location.origin)
+            
+          })
+          .catch(error => console.log(error));
+      } else {
+        console.log("Erreur est survenue !");
+      }
+    }
+  }
 };
 </script>
 

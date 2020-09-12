@@ -7,7 +7,7 @@
       <div class="container">
      
   <p class="control has-icons-left has-icons-right">
-    <input class="input" type="username" placeholder="Username">
+    <input class="input" type="username" v-model="dataSignup.username" placeholder="Username">
     <span class="icon is-small is-left">
       <i class="fas fa-user"></i>
       
@@ -20,7 +20,7 @@
  <div class="container">
      
   <p class="control has-icons-left has-icons-right">
-    <input class="input" type="email" placeholder="Email">
+    <input class="input" type="email"  v-model="dataSignup.email" placeholder="Email">
     <span class="icon is-small is-left">
       <i class="fas fa-envelope"></i>
     </span>
@@ -31,14 +31,14 @@
 </div>
 <div class="container">
   <p class="control has-icons-left">
-    <input class="input" type="password" placeholder="Password">
+    <input class="input" type="password" v-model="dataSignup.password" placeholder="Password">
     <span class="icon is-small is-left">
       <i class="fas fa-lock"></i>
     </span>
   </p>
 </div>
-<input class="styled"
-       type="button"
+<input @click.prevent="sendSignup" class="styled"
+       type="submit"
        value="Envoyer">
 
   </div>
@@ -47,12 +47,47 @@
 <script>
 
 
+import axios from "axios";
 export default {
-  name: 'Signup',
-  components: {
-    
+  name: "Signup",
+  data() {
+    return {
+      dataSignup: {
+        username: null,
+        email: null,
+        password: null
+      },
+      msg: ""
+    };
   },
-}
+ 
+  methods: {
+    sendSignup() {
+      const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/
+      const regexEmail = /^[a-z0-9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g;
+      const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
+      if (
+        (this.dataSignup.email !== null ||
+        this.dataSignup.username !== null ||
+        this.dataSignup.password !== null) &&
+        (regexPassword.test(this.dataSignup.password) && regexEmail.test(this.dataSignup.email) && usernameRegex.test(this.dataSignup.username))
+      ) {
+        axios
+          .post("http://localhost:3000/api/auth/signup", this.dataSignup)
+          .then(response => {
+            console.log(response);
+           
+            this.dataSignup.email = null;
+            this.dataSignup.username = null;
+            this.dataSignup.password = null;
+          })
+          .catch(error => console.log(error));
+      } else {
+        alert("Erreur est survenue !");
+      }
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
