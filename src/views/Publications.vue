@@ -1,9 +1,9 @@
 <template>
-  <div class="about">
+  <div class="publications">
     <div class="general is-primary">
       <div class="general-body">
         <div class="container">
-          <h1 class="title is-size-1">Informations sur Groupomania</h1>          
+          <h1 class="title is-size-1">Voir et partager les publications</h1>          
         </div>
       </div>
     </div>
