@@ -3,13 +3,11 @@
     <h1 class="title is-size-1">Merci de vous connecter :</h1>
     <div class="container">
       <p class="control has-icons-left has-icons-right">
-        <input class="input" type="username" v-model="dataLogin.username" placeholder="Username" />
+        <input class="input" type="email" v-model="dataLogin.email" placeholder="Email" />
         <span class="icon is-small is-left">
-          <i class="fas fa-user"></i>
+          <i class="fas fa-envelope"></i>
         </span>
-        <span class="icon is-small is-right">
-          <i class="fas fa-check"></i>
-        </span>
+       
       </p>
     </div>
 
@@ -33,7 +31,7 @@ export default {
   data() {
     return {
       dataLogin: {
-        username: null,
+        email: null,
         password: null
       },
       msg: ""
@@ -46,7 +44,7 @@ export default {
     logIn() {
       if (
         
-        this.dataLogin.username !== null ||
+        this.dataLogin.email !== null ||
         this.dataLogin.password !== null
       ) {
         axios
