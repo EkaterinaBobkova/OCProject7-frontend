@@ -2,7 +2,7 @@
 <nav class="navbar container" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-     <a href="#"><img id="logo" src="../../assets/logo.png" width="250" height="500" alt="logo"/></a>
+     <a href="#"><img id="logo" src="@/assets/logo.png" width="250" height="500" alt="logo"/></a>
     </a>
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -14,7 +14,7 @@
     <div class="navbar-start">
       <router-link to="/" class="navbar-item">Accueil</router-link>
       <router-link to="/about" class="navbar-item">A propos</router-link>
-      <router-link to="/publications" class="navbar-item">Voir les publications</router-link>
+      <router-link to="/wall" class="navbar-item">Voir les publications</router-link>
     </div>
     <div class="navbar-end">
       <div class="navbar-item">
