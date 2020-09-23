@@ -45,7 +45,7 @@
         
         <footer class="card-footer">
           <a href="#" class="card-footer-item">Modifier</a>
-          <a href="#" class="card-footer-item">Supprimer</a>
+          <a href="#" @click.prevent="deleteWallPost(contentPublication.id)" class="card-footer-item">Supprimer</a>
         </footer>
       </div>
     </div>
@@ -95,6 +95,27 @@ axios
         
       
     },
+        deleteWallPost(id) {
+                    
+                      const post_id = this.contentPublications.findIndex(post => post.id === id)
+
+                   if (post_id !== -1) {
+                        this.contentPublications.splice(post_id, 1)
+                    }
+                    axios
+        .delete("http://localhost:3000/api/publications/",  {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          },
+          // data: {
+          //   contentPublicationId: this. contentPublication.id,
+            
+          // }
+        })
+       
+        .catch(error => console.log(error));
+
+                },
     onFileChange(e) {
       console.log(e);
       this.contentPublication.postImage =
