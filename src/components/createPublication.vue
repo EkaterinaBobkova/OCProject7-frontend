@@ -3,13 +3,12 @@
       <h3> Ecrivez quelque chose : </h3>
     <div class="field">
       
-      <form enctype="multipart/form-data" action="/create" method="post">
+      <form @submit.prevent="createPublication">
         <div class="control">
-         <textarea class="textarea" cols="55" rows="5" v-model="contentPublication.content"  placeholder="Votre message"></textarea>
+         <textarea  class="textarea" cols="55" rows="5" v-model="contentPublication.content"  placeholder="Votre message"></textarea>
           <br />
           
         </div>
-
 
         <div class="file">
   <label class="file-label">
@@ -29,10 +28,29 @@
   </label>
 </div>
 
-        <input type="submit" class=" button button is-dark" @click.prevent="createPublication" value="Submit" />
+        <input type="submit" class=" button button is-dark" value="Envoyer" />
         
       </form>
     </div>
+    <div class="field">
+    <div class="card" >
+
+  <div class="card-content" v-for="contentPublication in contentPublications" :key="contentPublication.id">
+    <div class="content">
+       {{ contentPublication.content }}
+      
+    
+   
+    </div>
+  </div>
+  <footer class="card-footer">
+    
+    <a href="#" class="card-footer-item">Modifier</a>
+    <a href="#" class="card-footer-item">Supprimer</a>
+  </footer>
+</div>
+    </div>
+
   </div>
 </template>
 
@@ -41,14 +59,20 @@ import axios from "axios";
 
 export default {
   name: "CreatePublication",
+  
   data() {
     return {
+      contentPublications: [],
       contentPublication: {
-        content: null,
-        postImage: null
+        content: '',
+        postImage: null,
+       
+        
       },
       msgError: ""
+      
     };
+    
   },
  
   methods: {
@@ -57,13 +81,11 @@ export default {
       const fd = new FormData();
       fd.append("inputFile", this.contentPublication.postImage);
       fd.append("content", this.contentPublication.content);
-      console.log("test récup", fd.get("inputFile"));
-      console.log("test récup", fd.get("content"));
       if (fd.get("inputFile") == "null" && fd.get("content") == "null") {
-        let msgReturn = document.getElementById('msgReturnAPI')
-        msgReturn.classList.add('text-danger')
+       
         this.msgError = "Rien à publier";
-      } else {
+      } 
+      else {
         axios
           .post("http://localhost:3000/api/publications", fd, {
             headers: {
@@ -105,5 +127,14 @@ h3{
 .button {
     margin-top: 10px;
     
+}
+
+.card {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+  width: 500px;
+  margin-top: 50px;
+ 
 }
 </style>

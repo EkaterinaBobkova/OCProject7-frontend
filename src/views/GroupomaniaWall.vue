@@ -5,7 +5,7 @@
       
  <h1 class="title is-size-1">Partager les publications : </h1> 
         <CreatePublication />
-
+        
 
   </div> 
 </template>
@@ -14,10 +14,12 @@
 import axios from "axios";
 import CreatePublication from "@/components/createPublication.vue";
 
+
 export default {
   name: "Wall",
   components: {
     CreatePublication,
+  
   
   },
  data() {
