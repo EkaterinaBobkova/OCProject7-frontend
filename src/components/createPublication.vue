@@ -38,14 +38,20 @@
       </form>
     </div>
     <div class="field" id="pubForm">
-      <div class="card"   v-for="contentPublication in contentPublications"
-          :key="contentPublication.id">
-        
-          <div class="content">{{ contentPublication.content }}</div>
-        
+      <div
+        class="card"
+        v-for="contentPublication in contentPublications"
+        :key="contentPublication.id"
+      >
+        <div class="content">{{ contentPublication.content }}</div>
+
         <footer class="card-footer">
           <a href="#" class="card-footer-item">Modifier</a>
-          <a href="#" @click.prevent="deleteWallPost(contentPublication.id)" class="card-footer-item">Supprimer</a>
+          <a
+            href="#"
+       
+            class="card-footer-item"
+          >Supprimer</a>
         </footer>
       </div>
     </div>
@@ -57,6 +63,9 @@ import axios from "axios";
 
 export default {
   name: "CreatePublication",
+  props: {
+    submit: Function,
+  },
 
   data() {
     return {
@@ -75,47 +84,46 @@ export default {
       if (this.contentPublication.content) {
         this.wallCount++;
         const fd = new FormData();
-      fd.append("inputFile", this.contentPublication.postImage);
-      fd.append("content", this.contentPublication.content);
+        fd.append("inputFile", this.contentPublication.postImage);
+        fd.append("content", this.contentPublication.content);
 
-axios
+        axios
           .post("http://localhost:3000/api/publications", fd, {
             headers: {
               Authorization: "Bearer " + window.localStorage.getItem("token"),
             },
-          })
-       
+          }).then(() => this.submit())
+
           .catch((error) => (this.msgError = error));
         this.contentPublications.unshift({
           id: this.wallCount,
           content: this.contentPublication.content,
         });
 
-        this.contentPublication.content = ""; }
-        
-      
+        this.contentPublication.content = "";
+      }
     },
-        deleteWallPost(id) {
-                    
-                      const post_id = this.contentPublications.findIndex(post => post.id === id)
+    // deleteWallPost(id) {
+    //   const post_id = this.contentPublications.findIndex(
+    //     (post) => post.id === id
+    //   );
 
-                   if (post_id !== -1) {
-                        this.contentPublications.splice(post_id, 1)
-                    }
-                    axios
-        .delete("http://localhost:3000/api/publications/",  {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          },
-          // data: {
-          //   contentPublicationId: this. contentPublication.id,
-            
-          // }
-        })
-       
-        .catch(error => console.log(error));
+    //   if (post_id !== -1) {
+    //     this.contentPublications.splice(post_id, 1);
+    //   }
+    //   axios
+    //     .delete("http://localhost:3000/api/publications/" + id, {
+    //       headers: {
+    //         Authorization: "Bearer " + localStorage.getItem("token"),
+    //       },
+    //       // data: {
+    //       //   contentPublicationId: this. contentPublication.id,
 
-                },
+    //       // }
+    //     })
+
+    //     .catch((error) => console.log(error));
+    // },
     onFileChange(e) {
       console.log(e);
       this.contentPublication.postImage =
