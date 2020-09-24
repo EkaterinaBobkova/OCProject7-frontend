@@ -38,6 +38,7 @@
       </form>
     </div>
     <div class="field" id="pubForm">
+      
       <div
         class="card"
         v-for="contentPublication in contentPublications"
@@ -74,6 +75,9 @@ export default {
       contentPublication: {
         content: "",
         attachment: "",
+         editPost: {},
+                editText: ''
+        
       },
       msgError: "",
     };

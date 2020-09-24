@@ -25,6 +25,9 @@
           <a class="button is-light">
             <router-link to="/signup" class="navbar-item">Sign up</router-link>
           </a>
+            <a class="button is-light">
+            <router-link to="/user" class="navbar-item">Votre compte</router-link>
+          </a>
         </div>
       </div>
     </div>

@@ -64,14 +64,17 @@ export default {
  
   methods: {
     sendSignup() {
-      const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/
+      const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[@#$%])(?!.*(.)\1{2}).*[a-z]/;
+
+
+
       const regexEmail = /^[a-z0-9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g;
-      const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
+     
       if (
         (this.dataSignup.email !== null ||
         this.dataSignup.username !== null ||
         this.dataSignup.password !== null) &&
-        (regexPassword.test(this.dataSignup.password) && regexEmail.test(this.dataSignup.email) && usernameRegex.test(this.dataSignup.username))
+        regexPassword.test(this.dataSignup.password) && regexEmail.test(this.dataSignup.email) && this.dataSignup.username
       ) {
         axios
           .post("http://localhost:3000/api/auth/signup", this.dataSignup)

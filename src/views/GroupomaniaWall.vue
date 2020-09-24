@@ -1,7 +1,9 @@
  <template>
   <div id="wall" class="wall">
     <h1 class="title is-size-1">Partager les publications :</h1>
-    <CreatePublication :submit="onSubmit" />
+    <Create :submit="onSubmit" />
+     <!-- <Update :submit="onSubmit" />
+      -->
     
 
    <div class="field" id="pubForm">
@@ -12,10 +14,11 @@
       {{publication.content}}</div>
 
       <footer class="card-footer">
+       
           <a href="#" class="card-footer-item">Modifier</a>
           <a
             href="#"
-            @click.prevent="() => delete(publication.id)"
+            @click.prevent="() => deletePost(publication.id)"
             class="card-footer-item"
           >Supprimer</a>
         </footer>
@@ -37,12 +40,16 @@
 
 <script>
 import axios from "axios";
-import CreatePublication from "@/components/createPublication.vue";
+import Create from "@/components/Forms/Publication/Create.vue";
+// import Update from "@/components/Forms/Publication/Update.vue";
+
 
 export default {
   name: "Wall",
   components: {
-    CreatePublication,
+    Create,
+    // Update,
+  
   },
   data() {
     return {
@@ -79,18 +86,18 @@ export default {
     onSubmit(){
       this.loadPosts();
     },
-    delete(id){
-      const post_id = this.contentPublications.findIndex(
+    deletePost(id){
+      const post_id = this.allPublications.findIndex(
         (publication) => publication.id === id
       );
 
       if (post_id !== -1) {
-        this.contentPublications.splice(post_id, 1);
-      }
-      axios
+        this.allPublications.splice(post_id, 1);
+        axios
         .delete("http://localhost:3000/api/publications/" + id, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
+            
           },
           // data: {
           //   contentPublicationId: this. contentPublication.id,
@@ -99,6 +106,8 @@ export default {
         })
 
         .catch((error) => console.log(error));
+      }
+      
     },
 
     },
