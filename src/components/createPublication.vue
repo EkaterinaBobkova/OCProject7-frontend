@@ -43,7 +43,7 @@
         v-for="contentPublication in contentPublications"
         :key="contentPublication.id"
       >
-        <div class="content">{{ contentPublication.content }}</div>
+        <div class="content">{{ contentPublication.content }} <br> {{ contentPublication.attachment }}</div>
 
         <footer class="card-footer">
           <a href="#" class="card-footer-item">Modifier</a>
@@ -73,7 +73,7 @@ export default {
       contentPublications: [],
       contentPublication: {
         content: "",
-        postImage: null,
+        attachment: "",
       },
       msgError: "",
     };
@@ -84,7 +84,7 @@ export default {
       if (this.contentPublication.content) {
         this.wallCount++;
         const fd = new FormData();
-        fd.append("inputFile", this.contentPublication.postImage);
+        fd.append("attachment", this.contentPublication.attachment);
         fd.append("content", this.contentPublication.content);
 
         axios
@@ -98,9 +98,11 @@ export default {
         this.contentPublications.unshift({
           id: this.wallCount,
           content: this.contentPublication.content,
+          attachment: this.contentPublication.attachment,
         });
 
         this.contentPublication.content = "";
+        this.contentPublication.attachment = "";
       }
     },
     // deleteWallPost(id) {
@@ -126,9 +128,9 @@ export default {
     // },
     onFileChange(e) {
       console.log(e);
-      this.contentPublication.postImage =
+      this.contentPublication.attachment =
         e.target.files[0] || e.dataTransfer.files;
-      console.log(this.contentPublication.postImage);
+      console.log(this.contentPublication.attachment);
     },
   },
 };
