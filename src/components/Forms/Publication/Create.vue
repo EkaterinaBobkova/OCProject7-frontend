@@ -4,6 +4,7 @@
     <div class="field">
       <form @submit.prevent="createPublication">
         <div class="control">
+          
           <textarea
             class="textarea"
             cols="55"

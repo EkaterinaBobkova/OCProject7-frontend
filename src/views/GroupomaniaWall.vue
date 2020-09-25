@@ -2,20 +2,20 @@
   <div id="wall" class="wall">
     <h1 class="title is-size-1">Partager les publications :</h1>
     <Create :submit="onSubmit" />
-     <!-- <Update :submit="onSubmit" />
-      -->
+     <!-- <Update :publication="publication" /> -->
     
 
    <div class="field" id="pubForm">
       <div
         class="card" v-for="publication in allPublications" :key="publication.id"
       >
+       
         <div class="content" >
       {{publication.content}}</div>
 
       <footer class="card-footer">
        
-          <a href="#" class="card-footer-item">Modifier</a>
+          <a href="#" class="card-footer-item"><router-link to="/update">Modifier</router-link></a>
           <a
             href="#"
             @click.prevent="() => deletePost(publication.id)"
