@@ -161,6 +161,7 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: justify;
   width: 500px;
   margin-top: 50px;
 }
@@ -169,5 +170,10 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.content {
+  margin-right: 30px;
+  margin-left: 30px;
 }
 </style>
