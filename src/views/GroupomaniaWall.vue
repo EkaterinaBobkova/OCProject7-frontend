@@ -15,7 +15,7 @@
 
       <footer class="card-footer">
        
-          <a href="#" class="card-footer-item"><router-link :to="{ name: 'Update', params: { id: publication.id }}">Modifier</router-link></a>
+          <a href="#" class="card-footer-item"><router-link :to="{ name: 'UpdatePost', params: { id: publication.id }}">Modifier</router-link></a>
           <a
             href="#"
             @click.prevent="() => deletePost(publication.id)"

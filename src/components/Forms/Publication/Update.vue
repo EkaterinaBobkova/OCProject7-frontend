@@ -2,11 +2,12 @@
 
 
   <div class="field">
-      <form @submit="(evt) => evt.preventDefault() || editPost(editedPost.id)">
+      <form @submit.prevent="editPost">
         <div class="control">
           
           <textarea
             class="textarea"
+            id="newText"  
             cols="55"
             rows="5"
            v-model="editedPost.content"
@@ -24,7 +25,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Update",
+  name: "UpdatePost",
   data() {
     return {
      
@@ -37,20 +38,29 @@ export default {
     
   },
   methods: {
-    editPost(id) {
+        editPost() {
+       let newMessage = document.getElementById("newText").value;
+     
+      let newContent = false;
+      if (newMessage !== this.editedPost.content != false) {
+        newContent = true;
+      }
         
-      console.log(this.$router);
+      // console.log(this.$router); 
+      if (newContent ) {
         axios
-          .put( "http://localhost:3000/api/publications/" + id,
+          .put(
+            "http://localhost:3000/api/publications",
             {
-              
-              content: this.editedPost.content,
+               content: this.editedPost.content,
+              postId: this.editedPost.id,
+            
            
             },
             {
               headers: {
                 authorization: "Bearer " + localStorage.getItem("token")
-              },
+              }
             }
           )
           .then(() => {
@@ -59,11 +69,16 @@ export default {
           })
           .catch(() => {
             console.log("erreur de modification");
-          });
-      
+            
+          })}
+          else{
+        console.log("aucune modification");
+      }
     },
-  },
+  
+  }
 };
+
 </script>
 <style scoped>
 
