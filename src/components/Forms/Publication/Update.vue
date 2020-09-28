@@ -1,23 +1,25 @@
 <template>
-  <!--Creat a new post-->
+
+
   <div class="field">
-    
-    <div class="card">
-       <textarea
+      <form @submit="(evt) => evt.preventDefault() || editPost(editedPost.id)">
+        <div class="control">
+          
+          <textarea
             class="textarea"
             cols="55"
             rows="5"
-             v-model="editedPost.content"
-            placeholder="modifier le texte"
+           v-model="editedPost.content"
+            placeholder="Modifiez votre message"
           ></textarea>
+          <br />
+        </div>
+
       
-      <div v-if="message" class="alert alert-danger">{{ message }}</div>
-       <input type="submit"  @click.prevent="() => editPost(editedPost.id)" class="button button is-dark" value="Envoyer" />
+
+        <input type="submit" class="button button is-dark" value="Envoyer" />
+      </form>
     </div>
-   
-   
-  
-  </div>
 </template>
 <script>
 import axios from "axios";
@@ -37,7 +39,7 @@ export default {
   methods: {
     editPost(id) {
         
-      
+      console.log(this.$router);
         axios
           .put( "http://localhost:3000/api/publications/" + id,
             {
@@ -70,12 +72,10 @@ export default {
   margin: 100px auto;
 }
 
-
 @media screen and (min-width: 320px) and (max-width: 500px) {
   .card {
     margin: 10px;
   }
 }
-
 
 </style>
