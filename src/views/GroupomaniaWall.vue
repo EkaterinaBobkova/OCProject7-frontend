@@ -56,7 +56,7 @@ export default {
       publication: {
         id: "",
         content: "",
-        image: "",
+        attachment: "",
       },
 
       allPublications: [],

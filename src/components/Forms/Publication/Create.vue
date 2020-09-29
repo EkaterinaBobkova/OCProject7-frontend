@@ -23,14 +23,14 @@
               name="inputFile"
               id="inputFile"
               aria-describedby="inputFileAddon"
-              @change="onFileChange"
+              @change="uploadImage"
             />
 
             <span class="file-cta">
               <span class="file-icon">
                 <i class="fas fa-upload"></i>
               </span>
-              <span class="file-label">Choisir le fichier</span>
+              <span class="file-label" for="inputFile" >Choisir le fichier</span>
             </span>
           </label>
         </div>
@@ -45,7 +45,11 @@
         v-for="contentPublication in contentPublications"
         :key="contentPublication.id"
       >
-        <div class="content">{{ contentPublication.content }} <br> {{ contentPublication.attachment }}</div>
+        <div class="content">{{ contentPublication.content }} <br> 
+        
+        
+           <img class="postImg" :src="contentPublication.attachment " />
+        </div>
 
         <footer class="card-footer">
           <a href="#" class="card-footer-item">Modifier</a>
@@ -86,10 +90,10 @@ export default {
 
   methods: {
     createPublication() {
-      if (this.contentPublication.content) {
+      if (this.contentPublication.content && this.contentPublication.attachment) {
         this.wallCount++;
         const fd = new FormData();
-        fd.append("attachment", this.contentPublication.attachment);
+        fd.append("inputFile", this.contentPublication.attachment);
         fd.append("content", this.contentPublication.content);
 
         axios
@@ -131,11 +135,17 @@ export default {
 
     //     .catch((error) => console.log(error));
     // },
-    onFileChange(e) {
-      console.log(e);
-      this.contentPublication.attachment =
-        e.target.files[0] || e.dataTransfer.files;
-      console.log(this.contentPublication.attachment);
+    uploadImage(evt) {
+      const files = evt.target.files;
+      if (!files.length) return;
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = evt => {
+        this.contentPublication.attachment = evt.target.result;
+        
+      };
+      // To enable reuploading of same files in Chrome
+      document.querySelector("#inputFile").value = "";
     },
   },
 };
@@ -158,11 +168,8 @@ h3 {
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   text-align: justify;
-  width: 500px;
+  width: 400px;
   margin-top: 50px;
 }
 
@@ -170,10 +177,20 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
   margin-right: 30px;
   margin-left: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.postImg {
+  
+  width: 150px;
+
 }
 </style>
