@@ -11,7 +11,8 @@
       >
        
         <div class="content" >
-      {{publication.content}}</div>
+      {{publication.content}}
+      </div>
 
       <footer class="card-footer">
        

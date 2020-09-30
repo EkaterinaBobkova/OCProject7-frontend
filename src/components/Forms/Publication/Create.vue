@@ -66,13 +66,11 @@
 
 <script>
 import axios from "axios";
-
 export default {
   name: "CreatePublication",
   props: {
     submit: Function,
   },
-
   data() {
     return {
       wallCount: 0,
@@ -87,29 +85,25 @@ export default {
       msgError: "",
     };
   },
-
   methods: {
     createPublication() {
-      if (this.contentPublication.content && this.contentPublication.attachment) {
+      if (this.contentPublication.content ) {
         this.wallCount++;
         const fd = new FormData();
         fd.append("inputFile", this.contentPublication.attachment);
         fd.append("content", this.contentPublication.content);
-
         axios
           .post("http://localhost:3000/api/publications", fd, {
             headers: {
               Authorization: "Bearer " + window.localStorage.getItem("token"),
             },
           }).then(() => this.submit())
-
           .catch((error) => (this.msgError = error));
         this.contentPublications.unshift({
           id: this.wallCount,
           content: this.contentPublication.content,
           attachment: this.contentPublication.attachment,
         });
-
         this.contentPublication.content = "";
         this.contentPublication.attachment = "";
       }
@@ -118,7 +112,6 @@ export default {
     //   const post_id = this.contentPublications.findIndex(
     //     (post) => post.id === id
     //   );
-
     //   if (post_id !== -1) {
     //     this.contentPublications.splice(post_id, 1);
     //   }
@@ -129,10 +122,8 @@ export default {
     //       },
     //       // data: {
     //       //   contentPublicationId: this. contentPublication.id,
-
     //       // }
     //     })
-
     //     .catch((error) => console.log(error));
     // },
     uploadImage(evt) {
@@ -162,24 +153,20 @@ h3 {
   display: flex;
   justify-content: center;
 }
-
 .button {
   margin-top: 10px;
 }
-
 .card {
   text-align: justify;
   width: 400px;
   margin-top: 50px;
 }
-
 #pubForm {
   display: flex;
   flex-direction: column;
   align-items: center;
   
 }
-
 .content {
   display: flex;
   flex-direction: column;
@@ -191,6 +178,5 @@ h3 {
 .postImg {
   
   width: 150px;
-
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
 
-
   <div class="field">
       <form @submit.prevent="editPost">
         <div class="control">
@@ -14,6 +13,27 @@
             placeholder="Modifiez votre message"
           ></textarea>
           <br />
+        </div>
+
+
+  <div class="file">
+          <label class="file-label">
+            <input
+              class="file-input"
+              type="file"
+              name="inputFile"
+              id="inputFile"
+         
+              @change="selectFile"
+            />
+
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload"></i>
+              </span>
+              <span class="file-label" for="inputFile" >Choisir le fichier</span>
+            </span>
+          </label>
         </div>
 
       
@@ -30,7 +50,9 @@ export default {
     return {
      
       editedPost: {
+          id: "",
         content: "",
+        attachment: "",
       },
       message: "",
       allPublications: [],
@@ -42,7 +64,7 @@ export default {
        let newMessage = document.getElementById("newText").value;
      
       let newContent = false;
-      if (newMessage !== this.editedPost.content != false) {
+      if (newMessage == this.editedPost.content != false) {
         newContent = true;
       }
         
@@ -75,22 +97,31 @@ export default {
         console.log("aucune modification");
       }
     },
+
+       selectFile(evt) {
+      const files = evt.target.files;
+      if (!files.length) return;
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = evt => {
+        this.editedPost.attachment = evt.target.result;
+        
+      };
+      // To enable reuploading of same files in Chrome
+      document.querySelector("#inputFile").value = "";
+    },
   
   }
 };
-
 </script>
 <style scoped>
-
 .card {
   max-width: 600px;
   margin: 100px auto;
 }
-
 @media screen and (min-width: 320px) and (max-width: 500px) {
   .card {
     margin: 10px;
   }
 }
-
 </style>
