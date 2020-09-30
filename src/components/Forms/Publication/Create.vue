@@ -47,18 +47,10 @@
           {{ contentPublication.content }} <br />
 
           <img class="postImg" :src="contentPublication.attachment" />
-          <div>
-            <i
-              @click="editWallPost(contentPublication)"
-              class="fa fa-pencil"
-            ></i>
-          </div>
+        
         </div>
 
-        <div v-if="editPost === contentPublication">
-          <textarea v-model="editText" id="wall" rows="3" cols="65"></textarea>
-          <button @click="editWallPostSubmit">Modifier</button>
-        </div>
+      
         <footer class="card-footer">
           <a href="#" class="card-footer-item">Modifier</a>
           <a href="#" class="card-footer-item">Supprimer</a>
@@ -85,8 +77,7 @@ export default {
       },
 
       msgError: "",
-      editPost: {},
-      editText: "",
+      
     };
   },
   methods: {
@@ -143,15 +134,8 @@ export default {
       // To enable reuploading of same files in Chrome
       document.querySelector("#inputFile").value = "";
     },
-    editWallPost(post) {
-      this.editPost = post;
-      this.editText = post.content;
-    },
-    editWallPostSubmit() {
-      this.editPost.content = this.editText;
-      this.editPost = null;
-      
-    },
+   
+ 
   },
 };
 </script>
