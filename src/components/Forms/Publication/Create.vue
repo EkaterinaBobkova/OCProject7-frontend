@@ -4,7 +4,6 @@
     <div class="field">
       <form @submit.prevent="createPublication">
         <div class="control">
-          
           <textarea
             class="textarea"
             cols="55"
@@ -30,7 +29,7 @@
               <span class="file-icon">
                 <i class="fas fa-upload"></i>
               </span>
-              <span class="file-label" for="inputFile" >Choisir le fichier</span>
+              <span class="file-label" for="inputFile">Choisir le fichier</span>
             </span>
           </label>
         </div>
@@ -39,25 +38,30 @@
       </form>
     </div>
     <div class="field" id="pubForm">
-      
       <div
         class="card"
         v-for="contentPublication in contentPublications"
         :key="contentPublication.id"
       >
-        <div class="content">{{ contentPublication.content }} <br> 
-        
-        
-           <img class="postImg" :src="contentPublication.attachment " />
+        <div class="content">
+          {{ contentPublication.content }} <br />
+
+          <img class="postImg" :src="contentPublication.attachment" />
+          <div>
+            <i
+              @click="editWallPost(contentPublication)"
+              class="fa fa-pencil"
+            ></i>
+          </div>
         </div>
 
+        <div v-if="editPost === contentPublication">
+          <textarea v-model="editText" id="wall" rows="3" cols="65"></textarea>
+          <button @click="editWallPostSubmit">Modifier</button>
+        </div>
         <footer class="card-footer">
           <a href="#" class="card-footer-item">Modifier</a>
-          <a
-            href="#"
-       
-            class="card-footer-item"
-          >Supprimer</a>
+          <a href="#" class="card-footer-item">Supprimer</a>
         </footer>
       </div>
     </div>
@@ -78,16 +82,16 @@ export default {
       contentPublication: {
         content: "",
         attachment: "",
-         editPost: {},
-                editText: ''
-        
       },
+
       msgError: "",
+      editPost: {},
+      editText: "",
     };
   },
   methods: {
     createPublication() {
-      if (this.contentPublication.content ) {
+      if (this.contentPublication.content) {
         this.wallCount++;
         const fd = new FormData();
         fd.append("inputFile", this.contentPublication.attachment);
@@ -97,7 +101,8 @@ export default {
             headers: {
               Authorization: "Bearer " + window.localStorage.getItem("token"),
             },
-          }).then(() => this.submit())
+          })
+          .then(() => this.submit())
           .catch((error) => (this.msgError = error));
         this.contentPublications.unshift({
           id: this.wallCount,
@@ -126,17 +131,26 @@ export default {
     //     })
     //     .catch((error) => console.log(error));
     // },
+
     uploadImage(evt) {
       const files = evt.target.files;
       if (!files.length) return;
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
-      reader.onload = evt => {
+      reader.onload = (evt) => {
         this.contentPublication.attachment = evt.target.result;
-        
       };
       // To enable reuploading of same files in Chrome
       document.querySelector("#inputFile").value = "";
+    },
+    editWallPost(post) {
+      this.editPost = post;
+      this.editText = post.content;
+    },
+    editWallPostSubmit() {
+      this.editPost.content = this.editText;
+      this.editPost = null;
+      
     },
   },
 };
@@ -165,7 +179,6 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 .content {
   display: flex;
@@ -176,7 +189,7 @@ h3 {
   align-items: center;
 }
 .postImg {
-  
   width: 150px;
 }
 </style>
+

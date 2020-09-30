@@ -12,6 +12,7 @@
        
         <div class="content" >
       {{publication.content}}
+    <img  :src="publication.attachment" />
       </div>
 
       <footer class="card-footer">

@@ -56,7 +56,13 @@ export default {
       },
       message: "",
       allPublications: [],
+      
+      props:{
+        default:true,
+        publication: route=>({search:route.query.q})
+      }
     };
+    
     
   },
   methods: {
@@ -67,12 +73,12 @@ export default {
       if (newMessage == this.editedPost.content != false) {
         newContent = true;
       }
-        
-      // console.log(this.$router); 
+      const id = this.$route.params.id;  
+      console.log(this.$route); 
       if (newContent ) {
         axios
           .put(
-            "http://localhost:3000/api/publications",
+            "http://localhost:3000/api/publications/"+ id,
             {
                content: this.editedPost.content,
               postId: this.editedPost.id,
