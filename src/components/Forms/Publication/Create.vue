@@ -38,12 +38,16 @@
       </form>
     </div>
     <div class="field" id="pubForm">
+      
       <div
         class="card"
         v-for="contentPublication in contentPublications"
         :key="contentPublication.id"
       >
+      
+      
         <div class="content">
+         
           {{ contentPublication.content }} <br />
 
           <img class="postImg" :src="contentPublication.attachment" />
@@ -70,10 +74,13 @@ export default {
   data() {
     return {
       wallCount: 0,
+      
       contentPublications: [],
       contentPublication: {
         content: "",
         attachment: "",
+        
+          
       },
 
       msgError: "",

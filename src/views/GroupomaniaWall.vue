@@ -11,8 +11,9 @@
       >
        
         <div class="content" >
+          <div>Publié par <em >{{publication.User.username}}</em> le <em >{{publication.createdAt.split(' ')[0]}}</em> </div>
       {{publication.content}}
-    <img  :src="publication.attachment" />
+    <!-- <img  :src="publication.attachment" /> -->
       </div>
 
       <footer class="card-footer">
@@ -42,6 +43,7 @@
 
 <script>
 import axios from "axios";
+import { mapState } from "vuex";
 import Create from "@/components/Forms/Publication/Create.vue";
 // import Update from "@/components/Forms/Publication/Update.vue";
 
@@ -55,16 +57,20 @@ export default {
   },
   data() {
     return {
-      publication: {
-        id: "",
-        content: "",
-        attachment: "",
-      },
+      // publication: {
+      //   User:"",
+      //   id: "",
+      //   content: "",
+      //   attachment: "",
+        
+      // },
 
       allPublications: [],
     };
   },
-
+ computed: {
+    ...mapState(['user'])
+  },
   methods: {
     setInfos(payload) {
       this.publication = payload.publication;
