@@ -57,13 +57,13 @@ export default {
   },
   data() {
     return {
-      // publication: {
-      //   User:"",
-      //   id: "",
-      //   content: "",
-      //   attachment: "",
+      publication: {
+        User:"",
+        id: "",
+        content: "",
+        attachment: "",
         
-      // },
+      },
 
       allPublications: [],
     };
@@ -71,6 +71,7 @@ export default {
  computed: {
     ...mapState(['user'])
   },
+  
   methods: {
     setInfos(payload) {
       this.publication = payload.publication;
