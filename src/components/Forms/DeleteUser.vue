@@ -45,17 +45,18 @@ export default {
         email: "",
         password: "",
       },
+      props: ['userId', 'token'],
       show: true,
       message: "",
       messageErreur: "",
     };
+    
   },
   methods: {
-    deleteAccount(id) { 
-        
-    
+    deleteAccount() { 
+       
       axios
-        .delete("http://localhost:3000/api/auth/users/" + id, {
+        .delete("http://localhost:3000/api/auth/users/" + this.userId, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
@@ -67,6 +68,7 @@ export default {
           location.replace(location.origin+'/#/signup');
         })
         .catch(error => console.log(error));
+      
     },
   }
 }

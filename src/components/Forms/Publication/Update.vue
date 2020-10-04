@@ -103,7 +103,6 @@ export default {
         console.log("aucune modification");
       }
     },
-
        selectFile(evt) {
       const files = evt.target.files;
       if (!files.length) return;

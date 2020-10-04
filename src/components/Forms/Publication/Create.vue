@@ -34,7 +34,7 @@
           </label>
         </div>
 
-        <input type="submit" class="button button is-dark" value="Envoyer" />
+        <input type="submit" class="btnS" value="Envoyer" />
       </form>
     </div>
     <div class="field" id="pubForm">
@@ -46,7 +46,9 @@
       >
       
       
+      
         <div class="content">
+         
          
           {{ contentPublication.content }} <br />
 
@@ -79,10 +81,10 @@ export default {
       contentPublication: {
         content: "",
         attachment: "",
+       
         
           
       },
-
       msgError: "",
       
     };
@@ -94,6 +96,7 @@ export default {
         const fd = new FormData();
         fd.append("inputFile", this.contentPublication.attachment);
         fd.append("content", this.contentPublication.content);
+          console.log(this.contentPublication.UserId);
         axios
           .post("http://localhost:3000/api/publications", fd, {
             headers: {
@@ -106,29 +109,13 @@ export default {
           id: this.wallCount,
           content: this.contentPublication.content,
           attachment: this.contentPublication.attachment,
+        
         });
         this.contentPublication.content = "";
         this.contentPublication.attachment = "";
+        
       }
     },
-    // deleteWallPost(id) {
-    //   const post_id = this.contentPublications.findIndex(
-    //     (post) => post.id === id
-    //   );
-    //   if (post_id !== -1) {
-    //     this.contentPublications.splice(post_id, 1);
-    //   }
-    //   axios
-    //     .delete("http://localhost:3000/api/publications/" + id, {
-    //       headers: {
-    //         Authorization: "Bearer " + localStorage.getItem("token"),
-    //       },
-    //       // data: {
-    //       //   contentPublicationId: this. contentPublication.id,
-    //       // }
-    //     })
-    //     .catch((error) => console.log(error));
-    // },
 
     uploadImage(evt) {
       const files = evt.target.files;
@@ -152,7 +139,7 @@ h3 {
   font-weight: bold;
   display: flex;
   justify-content: center;
-  color: rgb(189, 16, 16);
+  color: #d1515a;
 }
 .field {
   display: flex;
@@ -182,5 +169,17 @@ h3 {
 .postImg {
   width: 150px;
 }
-</style>
 
+.btnS {
+  background-color : #122442;
+  color: #ffff;
+  margin-top: 10px;
+  width: 100px;
+  height: 50px;
+  font-size: 1.3em;
+  
+}
+
+
+
+</style>

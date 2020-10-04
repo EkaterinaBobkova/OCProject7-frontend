@@ -33,6 +33,7 @@
     </div>
   </div>
 </nav>
+<hr>
 </template>
 <script>
 export default {
@@ -48,11 +49,22 @@ export default {
       font-weight: bold;
       color: #363738;
       &.router-link-exact-active {
-        color: #c91010;
+        color:  #d1515a;
       }
     } 
   
   } 
+
+
+  hr {
+ 
+    border-top: 20px double #122442;
+    color: #122442;
+    overflow: visible;
+    text-align: center;
+    height: 10px;
+}
+
 
 
 
