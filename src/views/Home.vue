@@ -23,14 +23,14 @@ export default {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 400px;
-
-  margin-bottom: 175px;
+  height: 600px;
+   margin-top:0px;
+  margin-bottom: 0px;
 }
 .title {
   color: white;
   text-shadow: 4px 4px 4px rgba(49, 46, 46, 0.6);
-  padding: 40px 0 20px 0;
+  padding: 90px 0 20px 0;
   font-size: 60px;
 }
 .subtitle {
