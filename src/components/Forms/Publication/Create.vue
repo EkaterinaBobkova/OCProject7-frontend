@@ -130,6 +130,8 @@ h3 {
 .field {
   display: flex;
   justify-content: center;
+  
+  
 }
 .button {
   margin-top: 10px;
@@ -143,6 +145,8 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+ 
+ 
 }
 .content {
   display: flex;
