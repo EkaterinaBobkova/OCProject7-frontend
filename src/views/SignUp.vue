@@ -1,10 +1,10 @@
 <template>
 
- <div class="container">
+ <div class="container forms">
           <h1 class="title is-size-1">Pour créer votre profil :</h1>          
       
 
-      <div class="container">
+      <div class="container ">
      
   <p class="control has-icons-left has-icons-right">
     <input class="input" type="username" v-model="dataSignup.username" placeholder="Username">
@@ -98,7 +98,13 @@ export default {
 
 <style lang="scss" scoped>
   
-
+.forms {
+  margin-top: 160px;
+  margin-bottom: 175px;
+}
+.title{
+  color: #122442;
+}
 
 .styled {
     border: 0;

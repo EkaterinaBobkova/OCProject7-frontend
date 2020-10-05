@@ -1,6 +1,6 @@
 <template>
  
-    <div class="container">
+    <div class="container forms">
    
         <h1 class="title is-size-1">
           <i class="fas fa-cog"></i>Paramètres de votre compte
@@ -24,3 +24,14 @@ export default {
 
 };
 </script>
+
+<style scoped>
+.forms {
+  margin-top: 160px;
+  margin-bottom: 175px;
+}
+.title{
+  color: #122442;
+}
+
+</style>

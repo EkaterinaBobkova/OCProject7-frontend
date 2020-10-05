@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container forms">
     <h1 class="title is-size-1">Merci de vous connecter :</h1>
-    <div class="container">
+    <div class="container ">
       <p class="control has-icons-left has-icons-right">
         <input class="input" type="email" v-model="dataLogin.email" placeholder="Email" />
         <span class="icon is-small is-left">
@@ -65,6 +65,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.forms {
+  margin-top: 160px;
+  margin-bottom: 175px;
+ 
+  
+}
+
+.title{
+  color: #122442;
+  font-size: 0.9em;
+}
+
 .styled {
   border: 0;
   line-height: 2.5;
@@ -89,4 +102,6 @@ export default {
 .styled:hover {
   background-color: rgba(255, 0, 0, 1);
 }
+
+
 </style>
