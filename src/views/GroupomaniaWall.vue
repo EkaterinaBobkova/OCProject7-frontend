@@ -186,7 +186,7 @@ export default {
   color: #122442;
 }
 .wall {
-  background-color: white;
+  background-color: rgb(240, 233, 233);
   min-height: 100%;
   padding: 6rem 0 3rem 0;
 }
