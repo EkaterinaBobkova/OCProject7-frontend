@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>Ecrivez quelque chose :</h3>
+    <br />
     <div class="field">
       <form @submit.prevent="createPublication">
         <div class="control">
@@ -38,29 +39,22 @@
       </form>
     </div>
     <div class="field" id="pubForm">
-      
       <div
         class="card"
         v-for="contentPublication in contentPublications"
         :key="contentPublication.id"
       >
-      
-      
-      
         <div class="content">
-         
-         
+          <!--          
           {{ contentPublication.content }} <br />
 
-          <img class="postImg" :src="contentPublication.attachment" />
-        
+          <img class="postImg" :src="contentPublication.attachment" /> -->
         </div>
 
-      
-        <footer class="card-footer">
+        <!-- <footer class="card-footer">
           <a href="#" class="card-footer-item">Modifier</a>
           <a href="#" class="card-footer-item">Supprimer</a>
-        </footer>
+        </footer> -->
       </div>
     </div>
   </div>
@@ -76,17 +70,13 @@ export default {
   data() {
     return {
       wallCount: 0,
-      
+
       contentPublications: [],
       contentPublication: {
         content: "",
         attachment: "",
-       
-        
-          
       },
       msgError: "",
-      
     };
   },
   methods: {
@@ -96,7 +86,7 @@ export default {
         const fd = new FormData();
         fd.append("inputFile", this.contentPublication.attachment);
         fd.append("content", this.contentPublication.content);
-          console.log(this.contentPublication.UserId);
+       
         axios
           .post("http://localhost:3000/api/publications", fd, {
             headers: {
@@ -109,11 +99,9 @@ export default {
           id: this.wallCount,
           content: this.contentPublication.content,
           attachment: this.contentPublication.attachment,
-        
         });
         this.contentPublication.content = "";
         this.contentPublication.attachment = "";
-        
       }
     },
 
@@ -128,8 +116,6 @@ export default {
       // To enable reuploading of same files in Chrome
       document.querySelector("#inputFile").value = "";
     },
-   
- 
   },
 };
 </script>
@@ -171,15 +157,11 @@ h3 {
 }
 
 .btnS {
-  background-color : #122442;
+  background-color: #122442;
   color: #ffff;
   margin-top: 10px;
   width: 100px;
   height: 50px;
   font-size: 1.3em;
-  
 }
-
-
-
 </style>

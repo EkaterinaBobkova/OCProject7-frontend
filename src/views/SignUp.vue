@@ -64,7 +64,8 @@ export default {
  
   methods: {
     sendSignup() {
-      const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[@#$%])(?!.*(.)\1{2}).*[a-z]/;
+      const regexPassword = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%_])([-+!*$@%_\w]{8,15})$/
+
 
 
 
@@ -81,13 +82,14 @@ export default {
           .then(response => {
             console.log(response);
            
-            this.dataSignup.email = null;
-            this.dataSignup.username = null;
-            this.dataSignup.password = null;
+            // this.dataSignup.email = null;
+            // this.dataSignup.username = null;
+            // this.dataSignup.password = null;
+        location.replace(location.origin)
           })
           .catch(error => console.log(error));
       } else {
-        alert("Erreur est survenue !");
+        alert("Le mot de passe doit contenir de 8 à 15 caractères,au moins une lettre minuscule, une lettre majuscule, un chiffre et un de ces caractères spéciaux: $ @ % * + - _ !");
       }
     }
   }

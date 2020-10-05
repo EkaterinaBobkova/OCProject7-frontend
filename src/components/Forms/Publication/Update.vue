@@ -1,46 +1,40 @@
 <template>
-
   <div class="field">
-      <form @submit.prevent="editPost">
-        <div class="control">
-          
-          <textarea
-            class="textarea"
-            id="newText"  
-            cols="55"
-            rows="5"
-           v-model="editedPost.content"
-            placeholder="Modifiez votre message"
-          ></textarea>
-          <br />
-        </div>
+    <form @submit.prevent="editPost">
+      <div class="control">
+        <textarea
+          class="textarea"
+          id="newText"
+          cols="55"
+          rows="5"
+          v-model="editedPost.content"
+          placeholder="Modifiez votre message"
+        ></textarea>
+        <br />
+      </div>
 
+      <div class="file">
+        <label class="file-label">
+          <input
+            class="file-input"
+            type="file"
+            name="inputFile"
+            id="inputFile"
+            @change="selectFile"
+          />
 
-  <div class="file">
-          <label class="file-label">
-            <input
-              class="file-input"
-              type="file"
-              name="inputFile"
-              id="inputFile"
-         
-              @change="selectFile"
-            />
-
-            <span class="file-cta">
-              <span class="file-icon">
-                <i class="fas fa-upload"></i>
-              </span>
-              <span class="file-label" for="inputFile" >Choisir le fichier</span>
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
             </span>
-          </label>
-        </div>
+            <span class="file-label" for="inputFile">Choisir le fichier</span>
+          </span>
+        </label>
+      </div>
 
-      
-
-        <input type="submit" class="button button is-dark" value="Envoyer" />
-      </form>
-    </div>
+      <input type="submit" class="button button is-dark" value="Envoyer" />
+    </form>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -48,47 +42,42 @@ export default {
   name: "UpdatePost",
   data() {
     return {
-     
       editedPost: {
-          id: "",
+        id: "",
         content: "",
         attachment: "",
       },
       message: "",
       allPublications: [],
-      
-      props:{
-        default:true,
-        publication: route=>({search:route.query.q})
-      }
+
+      props: {
+        default: true,
+        publication: (route) => ({ search: route.query.q }),
+      },
     };
-    
-    
   },
   methods: {
-        editPost() {
-       let newMessage = document.getElementById("newText").value;
-     
+    editPost() {
+      let newMessage = document.getElementById("newText").value;
+
       let newContent = false;
-      if (newMessage == this.editedPost.content != false) {
+      if ((newMessage == this.editedPost.content) != false) {
         newContent = true;
       }
-      const id = this.$route.params.id;  
-      console.log(this.$route); 
-      if (newContent ) {
+      const id = this.$route.params.id;
+      console.log(this.$route);
+      if (newContent) {
         axios
           .put(
-            "http://localhost:3000/api/publications/"+ id,
+            "http://localhost:3000/api/publications/" + id,
             {
-               content: this.editedPost.content,
+              content: this.editedPost.content,
               postId: this.editedPost.id,
-            
-           
             },
             {
               headers: {
-                authorization: "Bearer " + localStorage.getItem("token")
-              }
+                authorization: "Bearer " + localStorage.getItem("token"),
+              },
             }
           )
           .then(() => {
@@ -97,26 +86,23 @@ export default {
           })
           .catch(() => {
             console.log("erreur de modification");
-            
-          })}
-          else{
+          });
+      } else {
         console.log("aucune modification");
       }
     },
-       selectFile(evt) {
+    selectFile(evt) {
       const files = evt.target.files;
       if (!files.length) return;
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
-      reader.onload = evt => {
+      reader.onload = (evt) => {
         this.editedPost.attachment = evt.target.result;
-        
       };
       // To enable reuploading of same files in Chrome
       document.querySelector("#inputFile").value = "";
     },
-  
-  }
+  },
 };
 </script>
 <style scoped>
