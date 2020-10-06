@@ -3,10 +3,10 @@
     <div class="container forms">
    
         <h1 class="title is-size-1">
-          <i class="fas fa-cog"></i>Paramètres de votre compte
+          <i class="fas fa-cog"></i>Paramètres 
         </h1>
         <hr />
-       <DeleteUser />
+       <ProfileUser />
     </div>
     
 
@@ -14,12 +14,12 @@
 
 <script>
 
-import DeleteUser from '@/components/Forms/DeleteUser.vue'
+import ProfileUser from '@/components/Forms/ProfileUser.vue'
 export default {
   name: "User",
   components: {
     
-    DeleteUser,
+    ProfileUser,
   },
 
 };
@@ -29,6 +29,7 @@ export default {
 .forms {
   margin-top: 160px;
   margin-bottom: 175px;
+  font-size: 0.9em;
 }
 .title{
   color: #122442;
