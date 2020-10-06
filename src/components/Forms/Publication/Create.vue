@@ -45,7 +45,7 @@
         :key="contentPublication.id"
       >
         <div class="content">
-          <!--          
+<!--                    
           {{ contentPublication.content }} <br />
 
           <img class="postImg" :src="contentPublication.attachment" /> -->

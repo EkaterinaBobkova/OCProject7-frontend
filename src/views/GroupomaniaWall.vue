@@ -128,13 +128,13 @@ export default {
       console.log(this.$route);
       this.hasBeenLiked ? this.likes-- : this.likes++;
       this.hasBeenLiked = !this.hasBeenLiked;
-      const id = this.$route.params.id;
+    //   const id = this.$route.params.id;
       axios
         .post(
-          "http://localhost:3000/api/publications/" + id,
+          "http://localhost:3000/api/react",
           {
-            likes: this.publication.likes,
-            postId: this.publication.id,
+                 publicationId: this.publication.id,
+                  likeType: this.like,
           },
           {
             headers: {
