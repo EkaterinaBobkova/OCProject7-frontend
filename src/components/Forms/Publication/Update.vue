@@ -106,6 +106,10 @@ export default {
 };
 </script>
 <style scoped>
+.field{
+      margin-top: 100px;
+      margin-bottom: 50px;
+}
 .card {
   max-width: 600px;
   margin: 100px auto;

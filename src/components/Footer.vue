@@ -18,6 +18,8 @@ export default {
 footer {
     background-color: #122442;
     color: #ffff;
+    bottom:0;
+    
 }
 
 .nameCompany{

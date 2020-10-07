@@ -66,7 +66,7 @@ a {
     display: flex;
 
     background-color: #122442;
-    height: 170px;
+    height: 190px;
   }
 }
 </style>

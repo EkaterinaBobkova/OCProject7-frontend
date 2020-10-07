@@ -45,10 +45,10 @@
         :key="contentPublication.id"
       >
         <div class="content">
-<!--                    
+                   
           {{ contentPublication.content }} <br />
 
-          <img class="postImg" :src="contentPublication.attachment" /> -->
+          <img class="postImg" :src="contentPublication.attachment" />
         </div>
 
         <!-- <footer class="card-footer">
