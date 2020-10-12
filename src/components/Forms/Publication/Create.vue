@@ -47,15 +47,10 @@
                 :key="contentPublication.id"
             >
                 <div class="content">
-                    {{ contentPublication.content }} <br />
+                    <!-- {{ contentPublication.content }} <br />
 
-                    <img class="postImg" :src="contentPublication.attachment" />
+                    <img class="postImg" :src="contentPublication.attachment" /> -->
                 </div>
-
-                <!-- <footer class="card-footer">
-          <a href="#" class="card-footer-item">Modifier</a>
-          <a href="#" class="card-footer-item">Supprimer</a>
-        </footer> -->
             </div>
         </div>
     </div>
@@ -141,7 +136,6 @@ h3 {
     text-align: justify;
     width: 400px;
     margin-top: 50px;
-   
 }
 #pubForm {
     display: flex;
@@ -155,7 +149,6 @@ h3 {
     margin-left: 30px;
     justify-content: center;
     align-items: center;
-    
 }
 .postImg {
     width: 150px;
