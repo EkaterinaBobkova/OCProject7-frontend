@@ -1,7 +1,7 @@
 <template>
     <div class="field">
         <div class="content">
-            <h1>Groupomania Users</h1>
+            <h3>Groupomania Users</h3>
             <hr />
 
             <div class="card" v-for="user in users" :key="user.id">
@@ -38,4 +38,9 @@ export default {
 };
 </script>
 <style scoped>
+h3{
+
+font-size: 1.9em;
+ color: #d1515a;
+}
 </style>

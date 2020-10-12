@@ -62,6 +62,7 @@ export default {
 };
 </script>
 <style scoped>
+
 .field {
     display: flex;
     justify-content: center;

@@ -1,7 +1,7 @@
 <template>
     <div class="field">
         <div class="content">
-            <h1>Groupomania Users publications</h1>
+            <h3>Groupomania Users publications</h3>
             <hr />
 
             <div
@@ -57,4 +57,9 @@ export default {
 };
 </script>
 <style scoped>
+h3{
+
+font-size: 1.9em;
+ color: #d1515a;
+}
 </style>

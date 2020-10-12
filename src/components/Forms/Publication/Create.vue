@@ -141,6 +141,7 @@ h3 {
     text-align: justify;
     width: 400px;
     margin-top: 50px;
+   
 }
 #pubForm {
     display: flex;
@@ -154,6 +155,7 @@ h3 {
     margin-left: 30px;
     justify-content: center;
     align-items: center;
+    
 }
 .postImg {
     width: 150px;

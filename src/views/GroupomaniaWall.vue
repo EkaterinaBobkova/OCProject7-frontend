@@ -18,7 +18,7 @@
                     </div>
                     <hr />
                     {{ publication.content }}
-                    <!-- <BlobImage :blob="publication.attachment.data" /> -->
+                    <BlobImage :blob="publication.attachment.data" />
                 </div>
 
                 <footer class="card-footer">
@@ -48,19 +48,6 @@
                         >Supprimer</a
                     >
                 </footer>
-                <!-- <button @click="createLike"
-                                    > {{publication.likes}}j'aime</button> -->
-                <div class="content">
-                    <div class="heart">
-                        <i
-                            class="far fa-heart fa-lg"
-                            :class="{ fass: hasBeenLiked }"
-                            @click="like(publication.id)"
-                        >
-                        </i>
-                    </div>
-                    <p class="likes">{{ likes }} j'aime</p>
-                </div>
             </div>
         </div>
     </div>
@@ -70,12 +57,12 @@
 import axios from "axios";
 
 import Create from "@/components/Forms/Publication/Create.vue";
-// import BlobImage from "@/components/Forms/Publication/BlobImage.vue";
+import BlobImage from "@/components/Forms/Publication/BlobImage.vue";
 export default {
     name: "Wall",
     components: {
         Create,
-        // BlobImage,
+        BlobImage,
     },
     data() {
         return {
@@ -142,59 +129,10 @@ export default {
                             Authorization:
                                 "Bearer " + localStorage.getItem("token"),
                         },
-                        // data: {
-                        //   contentPublicationId: this. contentPublication.id,
-                        // }
                     })
                     .catch((error) => console.log(error));
             }
         },
-        like(id) {
-            this.allPublications.findIndex(
-                (publication) => publication.id === id
-            );
-            this.hasBeenLiked ? this.likes-- : this.likes++;
-            this.hasBeenLiked = !this.hasBeenLiked;
-            axios
-                .post(
-                    "http://localhost:3000/api/react/" + id,
-                    {
-                        publicationId: this.publication.id,
-                        likeType: this.like,
-                    },
-                    {
-                        headers: {
-                            authorization:
-                                "Bearer " + localStorage.getItem("token"),
-                        },
-                    }
-                )
-                .then(() => {
-                    this.message === "";
-                })
-                .catch(() => {
-                    console.log("erreur ");
-                });
-        },
-        //  createLike() {
-        //   if (this.publication.like) {
-        //     this.count+=1;
-        //     const fd = new FormData();
-        //     fd.append("likes", this.publication.likes);
-        //     axios
-        //       .post("http://localhost:3000/api/publications", fd, {
-        //         headers: {
-        //           Authorization: "Bearer " + window.localStorage.getItem("token"),
-        //         },
-        //       })
-        //       .then(() => this.submit())
-        //       .catch((error) => (this.msgError = error));
-        //     this.contentPublications.unshift({
-        //       likes: this.publication.likes,
-        //     });
-        //     this.publication.likes = "";
-        //   }
-        // },
     },
     mounted() {
         this.loadPosts();
