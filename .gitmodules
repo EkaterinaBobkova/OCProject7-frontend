@@ -1,0 +1,3 @@
+[submodule "OCProject7-backend"]
+	path = OCProject7-backend
+	url = https://github.com/EkaterinaBobkova/OCProject7-backend.git
