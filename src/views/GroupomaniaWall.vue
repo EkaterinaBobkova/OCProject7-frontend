@@ -1,6 +1,7 @@
- <template>
+  <template>
     <div id="wall" class="wall">
-        <h1 class="titre title ">Partager les publications :</h1>
+        <h1 class="titre title">Partager les publications :</h1>
+
         <Create :submit="onSubmit" />
 
         <div class="field" id="pubForm">
@@ -17,11 +18,17 @@
                     </div>
                     <hr />
                     {{ publication.content }}
-                   <BlobImage :blob="publication.attachment.data"/>
+                    <!-- <BlobImage :blob="publication.attachment.data" /> -->
                 </div>
 
                 <footer class="card-footer">
-                    <a href="#" class="card-footer-item"
+                    <a
+                        href="#"
+                        class="card-footer-item"
+                        v-if="
+                            publication.UserId == user.id ||
+                            user.isAdmin == true
+                        "
                         ><router-link
                             :to="{
                                 name: 'UpdatePost',
@@ -32,8 +39,12 @@
                     >
                     <a
                         href="#"
-                        @click.prevent="() => deletePost(publication.id)"
                         class="card-footer-item"
+                        v-if="
+                            publication.UserId == user.id ||
+                            user.isAdmin == true
+                        "
+                        @click.prevent="() => deletePost(publication.id)"
                         >Supprimer</a
                     >
                 </footer>
@@ -57,38 +68,44 @@
 
 <script>
 import axios from "axios";
-import { mapState } from "vuex";
-import Create from "@/components/Forms/Publication/Create.vue";
-import BlobImage from "@/components/Forms/Publication/BlobImage.vue";
 
+import Create from "@/components/Forms/Publication/Create.vue";
+// import BlobImage from "@/components/Forms/Publication/BlobImage.vue";
 export default {
     name: "Wall",
     components: {
         Create,
-        BlobImage,
+        // BlobImage,
     },
     data() {
         return {
-            // count: 0,
+            user: "",
             publication: {
                 User: "",
                 id: "",
                 content: "",
                 attachment: "",
+                UserId: "",
             },
+
             allPublications: [],
             likes: 0,
             hasBeenLiked: false,
+
             props: {
                 default: true,
                 publication: (route) => ({ search: route.query.q }),
             },
         };
     },
-    computed: {
-        ...mapState(["user"]),
+    created() {
+        axios
+            .get("http://localhost:3000/api/auth", {
+                headers: { Authorization: "Bearer " + localStorage.token },
+            })
+            .then((response) => (this.user = response.data.user))
+            .catch((err) => console.log(err));
     },
-
     methods: {
         setInfos(payload) {
             this.publication = payload.publication;
@@ -116,6 +133,7 @@ export default {
             const post_id = this.allPublications.findIndex(
                 (publication) => publication.id === id
             );
+
             if (post_id !== -1) {
                 this.allPublications.splice(post_id, 1);
                 axios
@@ -135,10 +153,8 @@ export default {
             this.allPublications.findIndex(
                 (publication) => publication.id === id
             );
-
             this.hasBeenLiked ? this.likes-- : this.likes++;
             this.hasBeenLiked = !this.hasBeenLiked;
-
             axios
                 .post(
                     "http://localhost:3000/api/react/" + id,
@@ -160,13 +176,11 @@ export default {
                     console.log("erreur ");
                 });
         },
-
         //  createLike() {
         //   if (this.publication.like) {
         //     this.count+=1;
         //     const fd = new FormData();
         //     fd.append("likes", this.publication.likes);
-
         //     axios
         //       .post("http://localhost:3000/api/publications", fd, {
         //         headers: {
@@ -176,16 +190,12 @@ export default {
         //       .then(() => this.submit())
         //       .catch((error) => (this.msgError = error));
         //     this.contentPublications.unshift({
-
         //       likes: this.publication.likes,
-
         //     });
         //     this.publication.likes = "";
-
         //   }
         // },
     },
-
     mounted() {
         this.loadPosts();
     },
@@ -198,9 +208,7 @@ export default {
     font-size: 2em;
     @media screen and (max-width: 1000px) {
         font-size: 1em;
-       
     }
-    
 }
 .wall {
     background-color: rgb(240, 233, 233);
@@ -208,18 +216,15 @@ export default {
     padding: 6rem 0 3rem 0;
     @media screen and (max-width: 1000px) {
         margin-top: 50px;
-       
     }
 }
 h1 {
     display: flex;
     justify-content: center;
 }
-
 .fass {
     color: #d1515a;
 }
-
 .headerPost {
     color: #d1515a;
     font-size: 0.9em;

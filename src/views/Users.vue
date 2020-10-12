@@ -1,28 +1,33 @@
 <template>
     <div class="container forms">
-        <h1 class="title is-size-1"><i class="fas fa-cog"></i>Paramètres</h1>
         <hr />
-        <ProfileUser />
+        <AdminUsers />
     </div>
 </template>
 
 <script>
-import ProfileUser from "@/components/Forms/ProfileUser.vue";
+import AdminUsers from "@/components/Forms/AdminUsers.vue";
 export default {
-    name: "User",
+    name: "Users",
     components: {
-        ProfileUser,
+        AdminUsers,
     },
 };
 </script>
 
 <style scoped>
 .forms {
+    display: flex;
+    justify-content: center;
     margin-top: 160px;
     margin-bottom: 175px;
     font-size: 0.9em;
 }
 .title {
     color: #122442;
+}
+
+.field {
+    font-size: 1.8em;
 }
 </style>
