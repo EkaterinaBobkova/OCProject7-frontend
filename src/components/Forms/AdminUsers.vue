@@ -38,9 +38,8 @@ export default {
 };
 </script>
 <style scoped>
-h3{
-
-font-size: 1.9em;
- color: #d1515a;
+h3 {
+    font-size: 1.9em;
+    color: #d1515a;
 }
 </style>

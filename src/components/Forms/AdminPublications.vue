@@ -19,7 +19,7 @@
                 >
                 <br />
 
-                <!-- <BlobImage :blob="publication.attachment.data"/> -->
+                <BlobImage :blob="publication.attachment.data"/>
                 <p class="title font-weight-bold">
                     créée le : {{ publication.createdAt }}
                 </p>
@@ -30,7 +30,11 @@
 </template>
 <script>
 import axios from "axios";
+import BlobImage from "@/components/Forms/Publication/BlobImage.vue";
 export default {
+     components: {
+        BlobImage,
+    },
     data() {
         return {
             user: "",
@@ -57,9 +61,8 @@ export default {
 };
 </script>
 <style scoped>
-h3{
-
-font-size: 1.9em;
- color: #d1515a;
+h3 {
+    font-size: 1.9em;
+    color: #d1515a;
 }
 </style>

@@ -78,7 +78,7 @@ export default {
                         "http://localhost:3000/api/publications/" + id,
                         {
                             content: this.editedPost.content,
-                             attachment: this.editedPost.attachment,
+                            attachment: this.editedPost.attachment,
                             postId: this.editedPost.id,
                         },
                         {

@@ -46,11 +46,7 @@
                 v-for="contentPublication in contentPublications"
                 :key="contentPublication.id"
             >
-                <div class="content">
-                    <!-- {{ contentPublication.content }} <br />
-
-                    <img class="postImg" :src="contentPublication.attachment" /> -->
-                </div>
+                <div class="content"></div>
             </div>
         </div>
     </div>
