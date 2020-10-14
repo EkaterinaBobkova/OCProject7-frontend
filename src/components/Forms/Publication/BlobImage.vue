@@ -17,7 +17,7 @@ export default {
             (acc, cur) => acc + String.fromCharCode(cur),
             ""
         );
-        console.log(this.blob);
+        
     },
 };
 </script>
