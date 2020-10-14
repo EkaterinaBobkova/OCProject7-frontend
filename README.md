@@ -1,5 +1,10 @@
 # ocproject7-groupomania
 
+backend / .env.dist -> insert your information to connect to the database SQL. Admin user with moderation rights :
+Email: admin@groupomania.fr Mdp: Mdpsecret7
+
+start server with: nodemon server
+
 ## Project setup
 ```
 npm install
