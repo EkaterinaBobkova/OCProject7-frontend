@@ -1,5 +1,5 @@
 # ocproject7-groupomania
-
+copy groupomania.sql in your database
 backend / .env.dist -> insert your information to connect to the database SQL. Admin user with moderation rights :
 Email: admin@groupomania.fr Mdp: Mdpsecret7
 
