@@ -1,4 +1,6 @@
 # ocproject7-groupomania
+clone the submodule with git clone --recursive
+
 copy groupomania.sql in your database
 backend / .env.dist -> insert your information to connect to the database SQL. Admin user with moderation rights :
 Email: admin@groupomania.fr Mdp: Mdpsecret7
