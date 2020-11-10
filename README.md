@@ -1,4 +1,4 @@
-##### Il s4qgit du projet du réseau social d’entreprise Groupomania. 
+##### Il s'agit du projet du réseau social d’entreprise Groupomania. 
 #### Techniques utilisées : Gestion du backend avec Node.js et Express, création de la base stockage de données SQL avec Sequelize, création du frontend de l’application avec le framework JS Vue.js.
 <img width="400" alt="groupomania" src="https://user-images.githubusercontent.com/63730777/98711486-547c8000-2385-11eb-9523-824dc5ec3d97.png">
 
