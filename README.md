@@ -8,7 +8,7 @@ clonez le submodule avec git clone --recursive
 copiez le fichier groupomania.sql dans votre base de données.
 backend / .env.dist -> insérez vos informations de connection à la base de données SQL.
 
-###### Utilisateur Admin avec les droits de modération :
+##### Utilisateur Admin avec les droits de modération :
 Email: admin@groupomania.fr Mdp: Mdpsecret7
 
 Lancez le server avec: nodemon server
